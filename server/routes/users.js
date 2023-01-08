@@ -6,16 +6,16 @@ const router = express.Router();
 
 router.put("/:id", verifyToken, update)
 
-router.delete("/:id", deleteUser)
+router.delete("/:id", verifyToken, deleteUser)
 
 router.get("/find/:id", getUser)
 
-router.put("/sub/:id", subscribe)
+router.put("/sub/:id", verifyToken, subscribe)
 
-router.put("/ubsub/:id", unsubscribe)
+router.put("/ubsub/:id", verifyToken, unsubscribe)
 
-router.put("/like/:videoId", like)
+router.put("/like/:videoId",verifyToken, like)
 
-router.put("/unlike/:videoId", dislike)
+router.put("/unlike/:videoId", verifyToken, dislike)
 
 export default router;
