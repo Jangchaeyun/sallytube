@@ -8,7 +8,7 @@ router.put("/:id", verifyToken, update)
 
 router.delete("/:id", verifyToken, deleteUser)
 
-router.get("/find/:id", getUser)
+router.get("/find/:id", verifyToken, getUser)
 
 router.put("/sub/:id", verifyToken, subscribe)
 
@@ -16,6 +16,6 @@ router.put("/ubsub/:id", verifyToken, unsubscribe)
 
 router.put("/like/:videoId",verifyToken, like)
 
-router.put("/unlike/:videoId", verifyToken, dislike)
+router.put("/dislike/:videoId", verifyToken, dislike)
 
 export default router;
