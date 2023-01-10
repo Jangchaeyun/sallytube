@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 
 const Container = styled.div`
   display: flex;
@@ -64,18 +65,31 @@ const Link = styled.span`
 `
 
 const SignIn = () => {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/auth/signin", { email, password })
+      console.log(res.data)
+    } catch (err) {
+      
+    }
+  }
   return (
     <Container>
       <Wrapper>
         <Title>로그인</Title>
         <SubTitle>sallytube를 계속하려면</SubTitle>
-        <Input placeholder="이메일" />
-        <Input type="password" placeholder="비밀번호" />
-        <Button>로그인</Button>
+        <Input placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
+        <Input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)}/>
+        <Button onClick={handleLogin}>로그인</Button>
         <Title>또는</Title>
-        <Input placeholder="사용자 이름" />
-        <Input placeholder="이메일" />
-        <Input type="password" placeholder="비밀번호" />
+        <Input placeholder="사용자 이름" onChange={(e) => setName(e.target.value)}/>
+        <Input placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
+        <Input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)}/>
         <Button>회원가입</Button>
       </Wrapper>
       <More>
