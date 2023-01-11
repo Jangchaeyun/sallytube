@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { loginStart, loginFailure, loginSuccess } from '../redux/userSlice'
+import { auth, provider } from "../firebase"
+import { signInWithPopup } from "firebase/auth"
+
 
 const Container = styled.div`
   display: flex;
@@ -81,6 +84,13 @@ const SignIn = () => {
     } catch (err) {
       dispatch(loginFailure())
     }
+  };
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {})
   }
   return (
     <Container>
@@ -90,6 +100,8 @@ const SignIn = () => {
         <Input placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
         <Input type="password" placeholder="비밀번호" onChange={(e) => setPassword(e.target.value)}/>
         <Button onClick={handleLogin}>로그인</Button>
+        <Title>또는</Title>
+        <Button onClick={signInWithGoogle}>구글로 로그인</Button>
         <Title>또는</Title>
         <Input placeholder="사용자 이름" onChange={(e) => setName(e.target.value)}/>
         <Input placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
